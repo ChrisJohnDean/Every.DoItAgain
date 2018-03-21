@@ -15,10 +15,8 @@ class DetailViewController: UIViewController {
 
     func configureView() {
         // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-                //label.text = detail.timestamp!.description
-            }
+        if let detail = detailItem, let label = detailDescriptionLabel, let toDoTitle = detailItem?.title, let descript = detailItem?.todoDescription {
+            label.text = "\(toDoTitle): \(descript) Priority: \(detail.priorityNumber)"
         }
     }
 
