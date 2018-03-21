@@ -27,6 +27,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        createDefaultToDoTask()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -191,6 +193,21 @@ extension MasterViewController {
     
 }
 
+// MARK: - UserDefault methods
+extension MasterViewController {
+    
+    private func createDefaultToDoTask() {
+        UserDefaults.standard.set("Lots to do", forKey: "title")
+        UserDefaults.standard.set("Gimme the deets", forKey: "todoDescription")
+        UserDefaults.standard.set(0, forKey: "priorityNumber")
+    }
+    
+    private func loadUserDefaults(titleTextField: UITextField, toDoDescriptionTextField: UITextField) {
+        titleTextField.text = UserDefaults.standard.string(forKey: "title")
+        toDoDescriptionTextField.text = UserDefaults.standard.string(forKey: "todoDescription")
+    }
+}
+
 
 // MARK: - Private methods
 extension MasterViewController {
@@ -206,10 +223,15 @@ extension MasterViewController {
         
         alert.addTextField { (textField: UITextField) in
             titleTextField = textField
+            titleTextField.clearsOnBeginEditing = false
         }
         alert.addTextField { (textField: UITextField) in
             toDoDescriptionTextField = textField
+            toDoDescriptionTextField.clearsOnBeginEditing = false
         }
+        
+        
+        loadUserDefaults(titleTextField: titleTextField, toDoDescriptionTextField: toDoDescriptionTextField)
         
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction) in
             print("ToDo title is \(String(describing: titleTextField.text))")
