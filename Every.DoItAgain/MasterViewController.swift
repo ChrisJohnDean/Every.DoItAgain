@@ -22,12 +22,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = editButtonItem
-
         let themeButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(chooseTheme(_:)))
-        
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        //navigationItem.rightBarButtonItem = addButton
-        
         navigationItem.rightBarButtonItems = [themeButton, addButton]
         
         if let split = splitViewController {
@@ -51,6 +47,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         createDefaultToDoTask()
     }
     
+    // Chooses theme from plist (needs to be refactored duhhh)
     @objc func chooseTheme(_ sender: Any) {
         var themeArray: Array<String>!
         
