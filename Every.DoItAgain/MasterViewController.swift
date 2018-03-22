@@ -15,22 +15,69 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     var managedObjectContext: NSManagedObjectContext? = nil
 
     var _fetchedResultsController: NSFetchedResultsController<ToDo>? = nil // Stored property below
-
+    
+    var currentTheme: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         navigationItem.leftBarButtonItem = editButtonItem
 
+        let themeButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(chooseTheme(_:)))
+        
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
+        //navigationItem.rightBarButtonItem = addButton
+        
+        navigationItem.rightBarButtonItems = [themeButton, addButton]
+        
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
         
+        if let path = Bundle.main.path(forResource: "Themes", ofType: "plist") {
+            let dictRoot = NSDictionary(contentsOfFile: path)
+            if let dict = dictRoot {
+                currentTheme = dict["Selected theme"] as! String
+                if currentTheme == "light" {
+                    view.backgroundColor = UIColor.lightGray
+                } else {
+                    view.backgroundColor = UIColor.darkGray
+                }
+            }
+        }
+        
+        
         createDefaultToDoTask()
     }
-
+    
+    @objc func chooseTheme(_ sender: Any) {
+        var themeArray: Array<String>!
+        
+        if let path = Bundle.main.path(forResource: "Themes", ofType: "plist") {
+            let dictRoot = NSDictionary(contentsOfFile: path)
+            if let dict = dictRoot {
+                themeArray = dict["Themes"] as! Array<String>
+            }
+        }
+        
+        if themeArray[0] == currentTheme {
+            currentTheme = themeArray[1]
+            view.backgroundColor = UIColor.darkGray
+        } else {
+            currentTheme = themeArray[0]
+            view.backgroundColor = UIColor.lightGray
+        }
+        
+        if let path = Bundle.main.path(forResource: "Themes", ofType: "plist") {
+            let dictRoot = NSMutableDictionary(contentsOfFile: path)
+            if let dict = dictRoot {
+                dict.setValue(currentTheme, forKey: "Selected theme")
+                dict.write(toFile: path, atomically: true)
+            }
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)

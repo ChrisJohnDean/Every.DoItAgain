@@ -14,6 +14,7 @@
 		897A7D0D2062EF07007F596C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 897A7D0B2062EF07007F596C /* Main.storyboard */; };
 		897A7D0F2062EF07007F596C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 897A7D0E2062EF07007F596C /* Assets.xcassets */; };
 		897A7D122062EF07007F596C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 897A7D102062EF07007F596C /* LaunchScreen.storyboard */; };
+		897A7D1A2063438C007F596C /* Themes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 897A7D192063438C007F596C /* Themes.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		897A7D0E2062EF07007F596C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		897A7D112062EF07007F596C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		897A7D132062EF07007F596C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		897A7D192063438C007F596C /* Themes.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Themes.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				897A7D102062EF07007F596C /* LaunchScreen.storyboard */,
 				897A7D132062EF07007F596C /* Info.plist */,
 				897A7D042062EF07007F596C /* Every_DoItAgain.xcdatamodeld */,
+				897A7D192063438C007F596C /* Themes.plist */,
 			);
 			path = Every.DoItAgain;
 			sourceTree = "<group>";
@@ -129,6 +132,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				897A7D1A2063438C007F596C /* Themes.plist in Resources */,
 				897A7D122062EF07007F596C /* LaunchScreen.storyboard in Resources */,
 				897A7D0F2062EF07007F596C /* Assets.xcassets in Resources */,
 				897A7D0D2062EF07007F596C /* Main.storyboard in Resources */,
