@@ -34,6 +34,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,9 +71,17 @@ extension MasterViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let ToDo = fetchedResultsController.object(at: indexPath)
-        configureCell(cell, withToDo: ToDo)
+        let toDo = fetchedResultsController.object(at: indexPath)
+        
+        if toDo.isCompleted {
+            cell.backgroundColor = UIColor.green
+        } else {
+            cell.backgroundColor = UIColor.clear
+        }
+        //tableView.reloadData()
+        configureCell(cell, withToDo: toDo)
         return cell
     }
 }
@@ -200,6 +209,7 @@ extension MasterViewController {
         UserDefaults.standard.set("Lots to do", forKey: "title")
         UserDefaults.standard.set("Gimme the deets", forKey: "todoDescription")
         UserDefaults.standard.set(0, forKey: "priorityNumber")
+        UserDefaults.standard.set(false, forKey: "isComleted")
     }
     
     private func loadUserDefaults(titleTextField: UITextField, toDoDescriptionTextField: UITextField) {

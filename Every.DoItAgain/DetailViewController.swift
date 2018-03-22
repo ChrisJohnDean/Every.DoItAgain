@@ -11,7 +11,8 @@ import UIKit
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
-
+    
+    
 
     func configureView() {
         // Update the user interface for the detail item.
@@ -31,6 +32,16 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func isCompleted(_ sender: UISwitch) {
+        guard let thisBool = detailItem?.isCompleted else {return}
+        //let thisBool = UserDefaults.standard.bool(forKey: "isComleted")
+        if thisBool {
+            detailItem?.isCompleted = false
+        } else {
+            detailItem?.isCompleted = true
+        }
+    }
+    
     var detailItem: ToDo? {
         didSet {
             // Update the view.
