@@ -80,7 +80,7 @@ extension MasterViewController {
         } else {
             cell.backgroundColor = UIColor.clear
         }
-        //tableView.reloadData()
+        
         configureCell(cell, withToDo: toDo)
         return cell
     }
